@@ -22,6 +22,7 @@
                             <h2>${action}</h2>
                         <div class="x_content">
                             <spring:url value="${job.id == null ? '/vagas/save' : '/vagas/update' }" var="save"/>
+                            <%--@elvariable id="job" type="br.edu.utfpr.tsi.prova02.domain.entity.Job"--%>
                             <form:form modelAttribute="job" action="${save}" method="post" cssClass="form-horizontal form-label-left">
                                 <form:hidden path="id" />
                                 <span class="section">Informações da vaga</span>
@@ -29,6 +30,7 @@
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="title">Title <span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <form:input path="title" id="title" cssClass="form-control col-md-7 col-xs-12" />
+                                        <form:errors path="title" cssClass="label-danger"/>
                                     </div>
                                 </div>
 
@@ -36,6 +38,7 @@
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">Descrição <span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <form:textarea path="description" cssClass="form-control col-md-7 col-xs-12" id="description" />
+                                        <form:errors path="description" cssClass="label-danger"/>
                                     </div>
                                 </div>
                                 <div class="ln_solid"></div>

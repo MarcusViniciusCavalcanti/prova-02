@@ -5,11 +5,13 @@ import br.edu.utfpr.tsi.prova02.domain.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.persistence.EntityNotFoundException;
+import javax.validation.Valid;
 import java.util.List;
 
 
@@ -57,7 +59,11 @@ public class JobController {
     }
 
     @PostMapping("/save")
-    public ModelAndView save(@ModelAttribute("job") Job job, ModelMap modelMap, RedirectAttributes redirectAttributes) {
+    public ModelAndView save(@Valid @ModelAttribute("job") Job job, BindingResult result, RedirectAttributes redirectAttributes) {
+        if (result.hasErrors()) {
+            return new ModelAndView("/jobs/form");
+        }
+
         try {
             jobService.save(job);
             redirectAttributes.addFlashAttribute("success", "Vaga criada com sucesso!");
@@ -68,7 +74,10 @@ public class JobController {
     }
 
     @PostMapping("/update")
-    public ModelAndView update(@ModelAttribute("job") Job job, ModelMap modelMap, RedirectAttributes redirectAttributes) {
+    public ModelAndView update(@Valid @ModelAttribute("job") Job job, ModelMap modelMap, BindingResult result, RedirectAttributes redirectAttributes) {
+        if (result.hasErrors()) {
+            return new ModelAndView("/jobs/form");
+        }
         try {
             jobService.save(job);
             redirectAttributes.addFlashAttribute("success", "Vaga Editada com sucesso");
