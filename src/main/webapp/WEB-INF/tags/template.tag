@@ -7,7 +7,7 @@
 <h:head title="${title}">
     <jsp:body>
 
-        <body class="nav-md">
+        <body class="nav-md" style="height: 100%">
         <div class="container body">
             <div class="main_container">
                 <div class="col-md-3 left_col">

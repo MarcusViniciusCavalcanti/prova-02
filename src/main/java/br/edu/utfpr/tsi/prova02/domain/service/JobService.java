@@ -19,4 +19,8 @@ public class JobService {
     public List<Job> findAll() {
         return jobsRepository.findAll();
     }
+
+    public void save(Job job) {
+        jobsRepository.save(job);
+    }
 }
