@@ -5,6 +5,7 @@ import br.edu.utfpr.tsi.prova02.domain.repository.JobsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Service
@@ -22,5 +23,9 @@ public class JobService {
 
     public void save(Job job) {
         jobsRepository.save(job);
+    }
+
+    public Job findById(Long id) {
+        return jobsRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Vaga com o id: " + id + " não existe"));
     }
 }

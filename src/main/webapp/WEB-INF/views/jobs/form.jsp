@@ -21,8 +21,9 @@
                         <div class="x_title">
                             <h2>${action}</h2>
                         <div class="x_content">
-                            <spring:url value="/jobs/save" var="save"/>
+                            <spring:url value="${job.id == null ? '/vagas/save' : '/vagas/update' }" var="save"/>
                             <form:form modelAttribute="job" action="${save}" method="post" cssClass="form-horizontal form-label-left">
+                                <form:hidden path="id" />
                                 <span class="section">Informações da vaga</span>
                                 <div class="item form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="title">Title <span class="required">*</span></label>
@@ -40,7 +41,7 @@
                                 <div class="ln_solid"></div>
                                 <div class="form-group">
                                     <div class="col-md-6 col-md-offset-3">
-                                        <button type="submit" class="btn btn-primary">Cancelar</button>
+                                        <a class="btn btn-primary" href="/vagas">Cancelar</a>
                                         <button id="send" type="submit" class="btn btn-success">Enviar</button>
                                     </div>
                                 </div>

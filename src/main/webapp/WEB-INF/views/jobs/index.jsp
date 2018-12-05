@@ -24,7 +24,7 @@
                         <thead>
                             <td>Titulo</td>
                             <td>Descrição</td>
-                            <%--<td>Ações</td>--%>
+                            <td>Ações</td>
                         </thead>
 
                         <tbody>
@@ -32,7 +32,7 @@
                                 <tr>
                                     <td>${job.title}</td>
                                     <td>${job.description}</td>
-                                    <%--<td><a class="btn btn-default" href="${pageContext.request.contextPath}/jobs/update?id=${job.id}">Editar</a></td>--%>
+                                    <td><a class="btn btn-default" href="/vagas/atualizar/${job.id}">Editar</a></td>
                                     <%--<td><a class="btn btn-danger" href="${pageContext.request.contextPath}/jobs/remove?id=${job.id}">Remover</a></td>--%>
                                     <%--<td><a class="btn btn-default" href="${pageContext.request.contextPath}/protected/candidate/jobs/add?jobId=${job.id}&candidateId=${candidate.id}">Candidatar</a></td>--%>
                                 </tr>
@@ -44,11 +44,11 @@
         </div>
     </div>
 
-    <c:if test="${!empty messageError}">
-        <div class=".error" role="errors" hidden>${messageError}</div>
+    <c:if test="${!empty error}">
+        <div class=".error" role="errors" hidden>${error}</div>
     </c:if>
 
-    <c:if test="${!empty message}">
-        <div class=".success" role="success" hidden>${message}</div>
+    <c:if test="${!empty success}">
+        <div class=".success" role="success" hidden>${success}</div>
     </c:if>
 </h:template>
