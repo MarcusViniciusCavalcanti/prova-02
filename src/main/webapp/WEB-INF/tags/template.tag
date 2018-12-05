@@ -67,7 +67,7 @@
         <script src="/resources/vendor/ion.rangeSlider/js/ion.rangeSlider.js"></script>
         <script src="/resources/vendor/nprogress/nprogress.js"></script>
         <script src="/resources/vendor/pnotify/dist/pnotify.js"></script>
-        <script src="/resources/vendor/validator/validator.js"></script>
+        <%--<script src="/resources/vendor/validator/validator.js"></script>--%>
         <script src="/resources/js/notify_message.js"></script>
 
         <script src="/resources/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
