@@ -3,6 +3,7 @@ package br.edu.utfpr.tsi.prova02.controller;
 import br.edu.utfpr.tsi.prova02.domain.entity.Job;
 import br.edu.utfpr.tsi.prova02.domain.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -58,6 +59,17 @@ public class JobController {
         return modelAndView;
     }
 
+    @GetMapping("deletar/{id}")
+    public ModelAndView delete(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
+        try {
+            jobService.deleteById(id);
+            redirectAttributes.addFlashAttribute("success", "Vaga deletada com sucesso");
+        } catch (EmptyResultDataAccessException e) {
+            redirectAttributes.addFlashAttribute("error", "Error ao deletar a vaga!");
+        }
+        return new ModelAndView("redirect:/vagas");
+    }
+
     @PostMapping("/save")
     public ModelAndView save(@Valid @ModelAttribute("job") Job job, BindingResult result, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
@@ -74,7 +86,7 @@ public class JobController {
     }
 
     @PostMapping("/update")
-    public ModelAndView update(@Valid @ModelAttribute("job") Job job, ModelMap modelMap, BindingResult result, RedirectAttributes redirectAttributes) {
+    public ModelAndView update(@Valid @ModelAttribute("job") Job job, BindingResult result, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             return new ModelAndView("/jobs/form");
         }

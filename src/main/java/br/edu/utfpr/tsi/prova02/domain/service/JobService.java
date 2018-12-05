@@ -28,4 +28,8 @@ public class JobService {
     public Job findById(Long id) {
         return jobsRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Vaga com o id: " + id + " não existe"));
     }
+
+    public void deleteById(Long id) {
+        jobsRepository.deleteById(id);
+    }
 }

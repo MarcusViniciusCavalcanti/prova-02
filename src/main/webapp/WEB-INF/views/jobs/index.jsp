@@ -32,9 +32,10 @@
                                 <tr>
                                     <td>${job.title}</td>
                                     <td>${job.description}</td>
-                                    <td><a class="btn btn-default" href="/vagas/atualizar/${job.id}">Editar</a></td>
-                                    <%--<td><a class="btn btn-danger" href="${pageContext.request.contextPath}/jobs/remove?id=${job.id}">Remover</a></td>--%>
-                                    <%--<td><a class="btn btn-default" href="${pageContext.request.contextPath}/protected/candidate/jobs/add?jobId=${job.id}&candidateId=${candidate.id}">Candidatar</a></td>--%>
+                                    <td>
+                                        <a class="btn btn-default" href="/vagas/atualizar/${job.id}">Editar</a>
+                                        <a class="btn btn-danger" href="/vagas/deletar/${job.id}">Deletar</a>
+                                    </td>
                                 </tr>
                             </c:forEach>
                         </tbody>
