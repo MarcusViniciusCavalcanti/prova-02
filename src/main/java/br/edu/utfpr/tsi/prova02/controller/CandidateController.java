@@ -2,6 +2,7 @@ package br.edu.utfpr.tsi.prova02.controller;
 
 import br.edu.utfpr.tsi.prova02.domain.entity.Candidate;
 import br.edu.utfpr.tsi.prova02.domain.entity.Job;
+import br.edu.utfpr.tsi.prova02.domain.entity.UserDetailsImp;
 import br.edu.utfpr.tsi.prova02.domain.service.CandidateService;
 import br.edu.utfpr.tsi.prova02.domain.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
@@ -33,12 +35,13 @@ public class CandidateController {
 
     @GetMapping("/dashboard")
     public ModelAndView dashboardCandidate(HttpSession session) {
-        //TODO this action should have candidate logged
-        Candidate candidate = candidateService.findById(1L);
+        UserDetailsImp user = (UserDetailsImp) session.getAttribute("user");
+        Long id = user.getId();
+        Candidate candidate = candidateService.findById(id);
         ModelAndView modelAndView = new ModelAndView("/candidate/dashboard");
         List<Job> jobs = jobService.findAll();
+        modelAndView.addObject("candidate", candidate);
         modelAndView.addObject("jobs",jobs);
-        session.setAttribute("candidate", candidate);
         return modelAndView;
     }
 

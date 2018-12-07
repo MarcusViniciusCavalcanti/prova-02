@@ -5,6 +5,7 @@ import br.edu.utfpr.tsi.prova02.domain.entity.Job;
 import br.edu.utfpr.tsi.prova02.domain.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -28,6 +29,7 @@ public class JobController {
         this.jobService = jobService;
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping
     public ModelAndView getAll() {
         List<Job> jobs = jobService.findAll();
@@ -36,6 +38,7 @@ public class JobController {
         return modelAndView;
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping("/novo")
     public ModelAndView newJob(@ModelAttribute("job") Job job, ModelMap modelMap) {
         ModelAndView modelAndView = new ModelAndView("/jobs/form");
@@ -44,6 +47,7 @@ public class JobController {
         return modelAndView;
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping("/atualizar/{id}")
     public ModelAndView update(@PathVariable("id") Long id, ModelMap modelMap, RedirectAttributes redirectAttributes) {
         ModelAndView modelAndView;
@@ -61,6 +65,7 @@ public class JobController {
         return modelAndView;
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping("deletar/{id}")
     public ModelAndView delete(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
         try {
@@ -72,6 +77,7 @@ public class JobController {
         return new ModelAndView("redirect:/vagas");
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping("/save")
     public ModelAndView save(@Valid @ModelAttribute("job") Job job, BindingResult result, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
@@ -87,6 +93,7 @@ public class JobController {
         return new ModelAndView("redirect:/vagas/novo");
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping("/update")
     public ModelAndView update(@Valid @ModelAttribute("job") Job job, BindingResult result, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
@@ -114,6 +121,7 @@ public class JobController {
         return new ModelAndView("redirect:/candidato/dashboard");
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping("/candidatos/{id}")
     public ModelAndView candidates(@PathVariable("id") Long id) {
         Job job = jobService.findById(id);
