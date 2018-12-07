@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.springframework.context.annotation.Scope;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 @Table(name = "candidates")
 @Data
 @EqualsAndHashCode(callSuper = true)
+@Scope("session")
 public class Candidate extends EntityApplication {
     @Column(nullable = false)
     private String name;
@@ -38,4 +40,11 @@ public class Candidate extends EntityApplication {
 
     @Column
     private int uiUixAccuracy;
+
+    public String fullAddress() {
+        return contact.getStreet() + ", " +
+               contact.getCityName() + ", " +
+               contact.getProvinceName() + " - "+
+               contact.getProvinceUF();
+    }
 }

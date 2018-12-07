@@ -1,5 +1,6 @@
 package br.edu.utfpr.tsi.prova02.controller;
 
+import br.edu.utfpr.tsi.prova02.domain.entity.Candidate;
 import br.edu.utfpr.tsi.prova02.domain.entity.Job;
 import br.edu.utfpr.tsi.prova02.domain.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.persistence.EntityNotFoundException;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -97,5 +99,26 @@ public class JobController {
             redirectAttributes.addFlashAttribute("error", "Ocorreu um erro na edição da vaga!");
         }
         return new ModelAndView("redirect:/vagas");
+    }
+
+    @GetMapping("/candidatar/{id}")
+    public ModelAndView candidateAdd(@PathVariable("id") Long id, HttpSession session, RedirectAttributes redirectAttributes) {
+        Candidate candidate = (Candidate) session.getAttribute("candidate");
+        try {
+            jobService.candidateAdd(candidate, id);
+            redirectAttributes.addFlashAttribute("success", "Candidatura registrada com sucesso");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error", "Não foi possível adicionar a vaga");
+            e.printStackTrace();
+        }
+        return new ModelAndView("redirect:/candidato/dashboard");
+    }
+
+    @GetMapping("/candidatos/{id}")
+    public ModelAndView candidates(@PathVariable("id") Long id) {
+        Job job = jobService.findById(id);
+        ModelAndView modelAndView = new ModelAndView("/jobs/jobs_candidates");
+        modelAndView.addObject("candidates", job.getCandidates());
+        return modelAndView;
     }
 }

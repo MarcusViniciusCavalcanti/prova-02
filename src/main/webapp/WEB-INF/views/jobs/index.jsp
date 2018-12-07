@@ -35,6 +35,7 @@
                                     <td>
                                         <a class="btn btn-default" href="/vagas/atualizar/${job.id}">Editar</a>
                                         <a class="btn btn-danger" href="/vagas/deletar/${job.id}">Deletar</a>
+                                        <a class="btn btn-success" href="/vagas/candidatos/${job.id}">Candidatos</a>
                                     </td>
                                 </tr>
                             </c:forEach>
