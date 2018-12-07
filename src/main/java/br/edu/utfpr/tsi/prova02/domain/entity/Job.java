@@ -4,11 +4,11 @@ import br.edu.utfpr.tsi.prova02.structure.EntityApplication;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "jobs")
@@ -24,5 +24,12 @@ public class Job extends EntityApplication {
     @NotBlank
     @Size(min = 5, max = 50, message = "O campo descrição de ser entre {min} e {max}")
     private String description;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Candidate> candidates = new HashSet<>();
+
+    public void addCandidate(Candidate candidate) {
+        this.candidates.add(candidate);
+    }
 }
 
