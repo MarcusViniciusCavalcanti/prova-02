@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -50,6 +51,11 @@ public class Prova02Application implements CommandLineRunner {
         candidate.setWebApplicationAccuracy(100);
         candidate.setWebsiteDesignAccuracy(70);
         candidate.setUiUixAccuracy(10);
+        candidate.setEmail("vinicius@candidate.com");
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String qwerty = encoder.encode("qwerty");
+        candidate.setPassword(qwerty);
+
 
         Contact contact = new Contact();
         contact.setCityName("Pinhão");
@@ -57,10 +63,10 @@ public class Prova02Application implements CommandLineRunner {
         contact.setProvinceUF("PR");
         contact.setStreet("Uma rua aew");
 
-//        contact = contactRepository.save(contact);
-
         candidate.setContact(contact);
 
         candidateRepository.save(candidate);
+
+
     }
 }

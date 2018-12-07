@@ -1,6 +1,7 @@
 <%@ tag description="Template" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="h" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <%@ attribute name="title" type="java.lang.String" %>
 
@@ -28,7 +29,7 @@
                                 </div>
                                 <div class="profile_info">
                                     <span>Welcome,</span>
-                                    <h2>${sessionScope.candidate.name}</h2>
+                                    <h2>${sessionScope.user.username}</h2>
                                 </div>
                             </div>
 

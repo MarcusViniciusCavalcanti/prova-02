@@ -1,5 +1,7 @@
 <%@tag description="Header" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+
 
 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
     <div class="menu_section">
@@ -14,9 +16,12 @@
 
         <ul class="nav side-menu">
             <li><a><i class="fa fa fa-briefcase"></i> Vagas <span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                    <li><a href="${pageContext.request.contextPath}/vagas">Todas</a></li>
+            <ul class="nav child_menu">
+                <li><a href="${pageContext.request.contextPath}/vagas">Todas</a></li>
+                <security:authorize access="hasRole('ROLE_ADMIN')">
                     <li><a href="${pageContext.request.contextPath}/vagas/novo">Nova</a></li>
+                </security:authorize>
+
                 </ul>
             </li>
         </ul>

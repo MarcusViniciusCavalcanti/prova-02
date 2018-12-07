@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="h" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <h:template title="Vagas">
     <div class="right_col" role="main">
@@ -22,23 +23,27 @@
                 <div class="x_content">
                     <table id="datatable-buttons" class="table table-striped table-bordered">
                         <thead>
-                            <td>Titulo</td>
-                            <td>Descrição</td>
+                        <td>Titulo</td>
+                        <td>Descrição</td>
+                        <security:authorize access="hasRole('ROLE_USER')">
                             <td>Ações</td>
+                        </security:authorize>
                         </thead>
 
                         <tbody>
-                            <c:forEach items="${jobs}" var="job">
-                                <tr>
-                                    <td>${job.title}</td>
-                                    <td>${job.description}</td>
+                        <c:forEach items="${jobs}" var="job">
+                            <tr>
+                                <td>${job.title}</td>
+                                <td>${job.description}</td>
+                                <security:authorize access="hasRole('ROLE_ADMIN')">
                                     <td>
                                         <a class="btn btn-default" href="/vagas/atualizar/${job.id}">Editar</a>
                                         <a class="btn btn-danger" href="/vagas/deletar/${job.id}">Deletar</a>
                                         <a class="btn btn-success" href="/vagas/candidatos/${job.id}">Candidatos</a>
                                     </td>
-                                </tr>
-                            </c:forEach>
+                                </security:authorize>
+                            </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
                 </div>

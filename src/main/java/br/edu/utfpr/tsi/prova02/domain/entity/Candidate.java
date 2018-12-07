@@ -15,7 +15,8 @@ import java.time.LocalDate;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Scope("session")
-public class Candidate extends EntityApplication {
+@PrimaryKeyJoinColumn(name="id")
+public class Candidate extends UserApplication {
     @Column(nullable = false)
     private String name;
 

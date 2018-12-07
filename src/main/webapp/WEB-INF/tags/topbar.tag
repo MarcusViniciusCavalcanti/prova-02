@@ -16,16 +16,6 @@
                     </a>
 
                     <ul class="dropdown-menu dropdown-usermenu pull-right">
-
-                        <%--<c:if test="${credentials.roles.contains('admin')}">--%>
-                            <%--<li><a href="${pageContext.request.contextPath}/members/profile"> Profile</a></li>--%>
-                        <%--</c:if>--%>
-                        <li>
-                            <a href="javascript:;">
-                                <span class="badge bg-red pull-right">50%</span>
-                                <span>Settings</span>
-                            </a>
-                        </li>
                         <li><a href="javascript:;">Help</a></li>
                         <li><a href="${pageContext.request.contextPath}/logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                     </ul>
